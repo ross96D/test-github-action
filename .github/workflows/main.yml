@@ -10,7 +10,7 @@ jobs:
 
       - name: Hello world action step
         id: hello
-        uses: ross96D/test-github-action@v1.2
+        uses: ross96D/test-github-action@v1.4
         with:
           who-to-greet: 'Mona the Octocat'
           file-to-show: file.txt
