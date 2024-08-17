@@ -1,6 +1,6 @@
-import * as core from "@actions/core";
-import { context } from "@actions/github";
-import * as fs from "node:fs/promises";
+const core = require("@actions/core");
+const github = require("@actions/github");
+const fs = require("node:fs/promises");
 
 try {
 	// `who-to-greet` input defined in action metadata file
@@ -9,12 +9,13 @@ try {
 	const time = new Date().toTimeString();
 	core.setOutput("time", time);
 	// Get the JSON webhook payload for the event that triggered the workflow
-	const payload = JSON.stringify(context.payload, undefined, 2);
+	const payload = JSON.stringify(github.context.payload, undefined, 2);
 	console.log(`The event payload: ${payload}`);
 
 	const filepath = core.getInput("file-to-show");
-	const data = await fs.readFile(filepath);
-	console.log("file data\n", data.toString());
+	fs.readFile(filepath).then((data) => {
+		console.log("file data\n", data.toString());
+	});
 } catch (error) {
 	core.setFailed(error.message);
 }

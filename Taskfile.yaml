@@ -1,0 +1,5 @@
+version: 3
+
+tasks:
+  build:
+    cmd: esbuild --format=esm --bundle --platform=node src/index.js --outfile=dist/bundle.js
